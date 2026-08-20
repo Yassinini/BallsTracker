@@ -1,5 +1,4 @@
 import cv2 as cv
-import numpy as np
 
 vid_path = "/home/suupatruupa/Downloads/WhatsApp Video 2026-08-20 at 18.32.52.mp4"
 vid = cv.VideoCapture(vid_path)
