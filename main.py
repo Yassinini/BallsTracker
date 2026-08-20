@@ -1,9 +1,11 @@
 import cv2 as cv
+import numpy as np
 
-vid_path = "/home/suupatruupa/Downloads/WhatsApp Video 2026-08-20 at 18.32.52.mp4"
+vid_path = "/home/suupatruupa/Downloads/WhatsApp Video 2026-08-20 at 21.59.22.mp4"
 vid = cv.VideoCapture(vid_path)
 fps = vid.get(cv.CAP_PROP_FPS)
 framenum =0
+inframe = []
 lower_lim = np.array([0, 0, 200])
 upper_lim = np.array([180, 40, 255])
 kernel = np.ones((3, 3), np.uint8)
@@ -20,7 +22,7 @@ while True:
 
     smol = cv.resize(frame, (1200, 800))
     grey = cv.cvtColor(smol, cv.COLOR_BGR2GRAY)
-    _, mask = cv.threshold(grey, 150, 255, cv.THRESH_BINARY)
+    _, mask = cv.threshold(grey, 180, 255, cv.THRESH_BINARY)
     mask = cv.erode(mask, kernel, iterations=2)
     mask = cv.dilate(mask, kernel, iterations=2)
     y, x = np.where(mask == 255)
@@ -29,6 +31,7 @@ while True:
         cx = np.mean(x)
         cy = np.mean(y)
 
+        inframe.append(framenum)
         x_min, x_max = x.min(), x.max()
         y_min, y_max = y.min(), y.max()
         # normal frame
@@ -41,7 +44,7 @@ while True:
         cv.putText(mask, str(framenum), (100, 80), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
         data.append({"time": time, "cx": cx, "cy": cy})
 
-    cv.imshow("frame", smol)
+    #cv.imshow("frame", smol)
     cv.imshow("mask", mask)
 
     if cv.waitKey(1) & 0xFF == 27:
@@ -51,6 +54,9 @@ time_sec = framenum / fps
 print(f"last frame: {framenum}")
 print(f"fps: {fps}")
 print(f"time: {time_sec}")
+print(f"\n frames with object inframe: {inframe}")
+print(f"number of FWOIF: {len(inframe)}")
+print(f"number of unused frames: {framenum - len(inframe)}")
 
 vid.release()
 cv.destroyAllWindows()
