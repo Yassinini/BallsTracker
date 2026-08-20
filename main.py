@@ -9,6 +9,7 @@ lower_lim = np.array([0, 0, 200])
 upper_lim = np.array([180, 40, 255])
 kernel = np.ones((3, 3), np.uint8)
 
+data = [] 
 
 while True:
     ok, frame = vid.read()
@@ -39,6 +40,7 @@ while True:
         cv.rectangle(mask, (x_min, y_min), (x_max, y_max), (255,255,255), 2)
         cv.circle(mask, (int(cx), int(cy)), 2, (255,255,255), 1)
         cv.putText(mask, str(framenum), (100, 80), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+        data.append({"time": time, "cx": cx, "cy": cy})
 
     cv.imshow("frame", smol)
     cv.imshow("mask", mask)
@@ -53,3 +55,9 @@ print(f"time: {time_sec}")
 
 vid.release()
 cv.destroyAllWindows()
+
+## TODO insert time,x,y into csv file
+import pandas as pd
+
+d = pd.DataFrame(data)
+d.to_csv("trajectory_data.csv", index=False)
