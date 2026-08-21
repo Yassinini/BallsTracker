@@ -58,11 +58,12 @@
 - [x] Derive kinematics equations for ideal trajectory
 - [x] Add air resistance/drag term to model
 - [x] Fit theoretical curve to real data (scipy)
-- [ ] Compare measured vs theoretical (residuals/R^2)
+- [x] Compare measured vs theoretical (residuals/R^2)
 
 ### Uncertainty part
 - [x] Pixel-to-meter conversion uncertainty
 - [x] Frame rate to time uncertainty
 - [x] Repeat trials for mean +/- standard deviation
 
-
+### FINAL
+- [ ] Report paper
