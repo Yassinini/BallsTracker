@@ -61,6 +61,6 @@
 
 ### Uncertainty part
 - [x] Pixel-to-meter conversion uncertainty
-- [ ] Frame rate to time uncertainty
+- [x] Frame rate to time uncertainty
 - [x] Repeat trials for mean +/- standard deviation
 - [ ] Propagate uncertainty into position/velocity

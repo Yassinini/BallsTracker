@@ -34,10 +34,12 @@ while True:
         inframe.append(framenum)
         x_min, x_max = x.min(), x.max()
         y_min, y_max = y.min(), y.max()
+
         # normal frame
         cv.rectangle(smol, (x_min, y_min), (x_max, y_max), (255,255,255), 2)
         cv.circle(smol, (int(cx), int(cy)), 2, (255,255,255), 1)
         cv.putText(smol, str(framenum), (100, 80), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
         # mask frame
         cv.rectangle(mask, (x_min, y_min), (x_max, y_max), (255,255,255), 2)
         cv.circle(mask, (int(cx), int(cy)), 2, (255,255,255), 1)
@@ -47,7 +49,7 @@ while True:
     cv.imshow("frame", smol)
     cv.imshow("mask", mask)
 
-    if cv.waitKey(1) & 0xFF == 27:
+    if cv.waitKey(50) & 0xFF == 27:
         break
 
 time_sec = framenum / fps
