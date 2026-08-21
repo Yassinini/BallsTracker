@@ -50,10 +50,12 @@ number of unused frames: 27
 
 - The program also tracks the ball as long as it exits in frame AND IS DETECTED, keeping it in the csv format for further data work
 --> This isolates the ball's motion for further analysis
+![[/projectileCV/attachs/frame.png]]
 
 ## Data work
 1 - The data is filtered and normalised, keeping the base of all graphs at h=0 
-![[Pasted image 20260822022932.png]]
+![[/projectileCV/attachs/ALL_Bounces.jpeg]]
+
 -- the graph shows 4 ball dropping trajectories which fit the **parabolic motion under constant gravitational acceleration** topic in physics
 
 - Height under gravity:
@@ -64,10 +66,68 @@ $$e = \sqrt{\frac{h_{n+1}}{h_n}}$$
 
 ## Averaging the graphs
 - The next step is to find a graph that unifies all the past graphs into another graph AND its dataset, calling them the AVG
-![[Pasted image 20260822023735.png]]
-
+![[projectileCV/attachs/AVG_Bounce.png]]
 --> The graph above represents the AVG graphing compared to the rest of the datasets graphed.
 
 ## Working with one
 To work with the data we found, we must separate a parabola of the first bounce to use that for comparison
-![[Pasted image 20260822024024.png]]
+![[projectileCV/attachs/bolabounce.png]]
+
+## More physics stuff (explained by AI cuz i didn't do it by hand)
+## (the drag model)
+
+### Why the ideal model isn't enough
+
+The equation used earlier — `h(t) = v_0 t - (1/2)g t^2` — assumes the ball moves through a vacuum. In reality, air exerts a **drag force** on the ball opposing its motion, which grows with the square of velocity. This means the equations of motion can no longer be solved with simple algebra — they need **differential equations**, and in this case, a **numerical solution** rather than a clean analytical formula.
+
+### Forces acting on the ball
+
+Two forces act on the ping pong ball mid-flight:
+
+$$F_{gravity} = -mg$$
+
+$$F_{drag} = -\frac{1}{2} \rho C_d A v^2 \cdot \text{sign}(v)$$
+
+Where:
+
+| Symbol | Meaning |
+|--------|---------|
+| $\rho$ | Air density (≈1.225 kg/m³ at sea level) |
+| $C_d$ | Drag coefficient (dimensionless, depends on shape) |
+| $A$ | Cross-sectional area of the ball |
+| $v$ | Instantaneous velocity |
+| $m$ | Mass of the ball |
+
+The `sign(v)` term matters because drag always opposes the *direction* of motion — it decelerates the ball whether it's moving up or down.
+
+### Equation of motion
+
+Combining both forces using Newton's second law ($F = ma$), the vertical motion becomes:
+
+$$m\frac{dv}{dt} = -mg - \frac{1}{2}\rho C_d A v^2 \cdot \text{sign}(v)$$
+
+This is a **nonlinear ODE** — unlike the no-drag case, it can't be integrated directly into a neat $h(t)$ formula. Instead, it needs to be solved **numerically**, stepping forward in tiny time increments.
+
+### Numerical integration method
+
+The model steps through time in small increments $\Delta t$, updating velocity and height at each step:
+
+```python
+v_new = v + a * dt
+h_new = h + v * dt
+```
+
+where `a` is calculated from the net force (gravity + drag) at each timestep. This is essentially **Euler's method** (or a more refined version like Runge-Kutta, if the code uses `scipy.integrate.solve_ivp`) — repeatedly asking "given where the ball is and how fast it's moving right now, where will it be a tiny moment later?"
+
+### Fitting the model to real data
+
+`scipy.optimize.curve_fit` (or `solve_ivp` + a custom loss function) is used to find the value of $C_d$ that makes the simulated drag trajectory best match the measured trajectory — since $C_d$ isn't known precisely for a ping pong ball in this exact setup, it's treated as a **free parameter** and fitted rather than assumed.
+
+### Comparing models
+
+Once fitted, three curves can sit on the same graph:
+1. **Measured trajectory** (from OpenCV tracking)
+2. **Ideal model** (no drag, pure kinematics)
+3. **Drag model** (fitted $C_d$, numerically solved)
+
+The "extent" of air resistance's effect is then measured by how much closer the drag model tracks the real data compared to the ideal model — quantified using **residuals** (the gap between model and data at each point) or **R²** (how much of the variance in the real data is explained by each model).
