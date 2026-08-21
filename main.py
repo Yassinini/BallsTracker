@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-vid_path = "/home/suupatruupa/Downloads/WhatsApp Video 2026-08-20 at 23.54.09.mp4"
+vid_path = "/home/suupatruupa/Downloads/WhatsApp Video 2026-08-20 at 23.36.28.mp4"
 vid = cv.VideoCapture(vid_path)
 fps = vid.get(cv.CAP_PROP_FPS)
 framenum =0
@@ -47,11 +47,11 @@ while True:
     cv.imshow("frame", smol)
     cv.imshow("mask", mask)
 
-    if cv.waitKey(50) & 0xFF == 27:
+    if cv.waitKey(1) & 0xFF == 27:
         break
 
 time_sec = framenum / fps
-print(f"last frame: {framenum}")
+print(f"total frames: {framenum}")
 print(f"fps: {fps}")
 print(f"time: {time_sec}")
 print(f"\n frames with object inframe: {inframe}")
@@ -61,8 +61,6 @@ print(f"number of unused frames: {framenum - len(inframe)}")
 vid.release()
 cv.destroyAllWindows()
 
-## TODO insert time,x,y into csv file
 import pandas as pd
-
 d = pd.DataFrame(data)
-d.to_csv("trajectory_data_4.csv", index=False)
+d.to_csv("trajectory_data_JUNK.csv", index=False)

@@ -60,7 +60,7 @@
 - [ ] Compare measured vs theoretical (residuals/R^2)
 
 ### Uncertainty part
-- [ ] Pixel-to-meter conversion uncertainty
+- [x] Pixel-to-meter conversion uncertainty
 - [ ] Frame rate to time uncertainty
-- [ ] Repeat trials for mean +/- standard deviation
+- [x] Repeat trials for mean +/- standard deviation
 - [ ] Propagate uncertainty into position/velocity
