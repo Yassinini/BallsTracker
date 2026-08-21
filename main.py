@@ -37,20 +37,31 @@ while True:
 
         # normal frame
         cv.rectangle(smol, (x_min, y_min), (x_max, y_max), (255,255,255), 2)
-        cv.circle(smol, (int(cx), int(cy)), 2, (255,255,255), 1)
+        cv.circle(smol, (int(cx), int(cy)), 2, (255,0,0), 1)
         cv.putText(smol, str(framenum), (100, 80), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
         # mask frame
         cv.rectangle(mask, (x_min, y_min), (x_max, y_max), (255,255,255), 2)
-        cv.circle(mask, (int(cx), int(cy)), 2, (255,255,255), 1)
+        cv.circle(mask, (int(cx), int(cy)), 2, (0,0,0), 1)
         cv.putText(mask, str(framenum), (100, 80), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
         data.append({"time": time, "cx": cx, "cy": cy})
 
     cv.imshow("frame", smol)
     cv.imshow("mask", mask)
 
-    if cv.waitKey(50) & 0xFF == 27:
+
+    key = cv.waitKey(50) & 0xFF
+    if key == 27: 
         break
+    elif key == 32: 
+        while True:
+            key2 = cv.waitKey(100) & 0xFF
+            if key2 == 32:  
+                break
+            if key2 == 27: 
+                break
+        if key2 == 27:
+            break
 
 time_sec = framenum / fps
 print(f"total frames: {framenum}")
