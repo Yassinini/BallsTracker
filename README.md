@@ -33,21 +33,25 @@
 - Repeat all conditions 5+ times for mean +- standard deviation
 - Compare measured spread against theoritical spread using error equations
 
-## Checklist
+---
+
+# Checklist
 
 ### Code part
 - [x] Thresholder
 - [x] Tracking object
 - [x] Frame counter & Timer
-- [ ] Store (time, x, y) data to CSV
-- [ ] Plot the trajectory of ball
+- [x] Store (time, x, y) data to CSV
+- [x] Plot the trajectory of ball ONCE
+- [x] Plot the trajectory of ball x4 
+- [x] Plot trajectory with air resistance on graph with matplotlib
 - [ ] Plot trajectory with vs without air resistance on graph with matplotlib
 
 ### Footage part
-- [ ] Set up environment for shooting
-- [ ] Make launcher
-- [ ] Test thresholder + ball + background
-- [ ] Final test before theory
+- [x] Set up environment for shooting
+- [x] Make launcher
+- [x] Test thresholder + ball + background
+- [x] Final test before theory
 
 ### Theoretical part
 - [ ] Derive kinematics equations for ideal trajectory
