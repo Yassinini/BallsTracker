@@ -72,5 +72,3 @@
 ![Averaged bounce trajectory](attaches/AVG_Bounce.png)
 
 ![Bola bounce diagram](attaches/bolabounce.png)
-
-![Description of image](attaches/AVG_Bounce.png)
