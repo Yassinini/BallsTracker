@@ -64,3 +64,11 @@
 - [x] Frame rate to time uncertainty
 - [x] Repeat trials for mean +/- standard deviation
 - [ ] Propagate uncertainty into position/velocity
+
+
+## Images
+![All bounces overlaid](attaches/ALL_Bounces.jpeg)
+
+![Averaged bounce trajectory](attaches/AVG_Bounce.png)
+
+![Bola bounce diagram](attaches/bolabounce.png)

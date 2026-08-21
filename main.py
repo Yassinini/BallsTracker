@@ -62,7 +62,6 @@ print(f"number of unused frames: {framenum - len(inframe)}")
 
 vid.release()
 cv.destroyAllWindows()
-
 import pandas as pd
 d = pd.DataFrame(data)
 d.to_csv("trajectory_data_JUNK.csv", index=False)
