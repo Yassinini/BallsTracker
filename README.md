@@ -46,7 +46,7 @@
 - [x] Plot the trajectory of ball ONCE
 - [x] Plot the trajectory of ball x4 
 - [x] Plot trajectory with air resistance on graph with matplotlib
-- [ ] Plot trajectory with vs without air resistance on graph with matplotlib
+- [x] Plot trajectory with vs without air resistance on graph with matplotlib
 
 ### Footage part
 - [x] Set up environment for shooting
