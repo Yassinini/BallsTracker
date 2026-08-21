@@ -69,8 +69,8 @@
 ## Images
 ![All bounces overlaid](attaches/ALL_Bounces.jpeg)
 
-[![Averaged bounce trajectory](attaches/AVG_Bounce.png)](attaches/AVG_Bounce.png)
-
 ![Averaged bounce trajectory](attaches/AVG_Bounce.png)
 
 ![Bola bounce diagram](attaches/bolabounce.png)
+
+![Description of image](attaches/AVG_Bounce.png)
