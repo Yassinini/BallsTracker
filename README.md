@@ -66,4 +66,4 @@
 - [x] Repeat trials for mean +/- standard deviation
 
 ### FINAL
-- [ ] Report paper
+- [x] Report paper
